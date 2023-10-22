@@ -3,18 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Go Taks</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <title>GODO</title>
   </head>
   <body>
-    <form>
-      <input name="content" id="content" type="text" />
-      <button type="submit">Add</button>
-    </form>
-    <div>
-      <ul>
-        <li>the first task</li>
-        <li>the second task</li>
-      </ul>
+    <div class="godo-container">
+      <h1 class="godo-logo">GODO</h1>
+      <div class="godo-wrapper">
+        <form class="godo-form">
+          <input
+            placeholder="Your new task goes here.."
+            class="godo-input"
+            name="content"
+            id="content"
+            type="text"
+          />
+          <button id="submit-btn" class="godo-submit-btn" type="submit">
+            Add
+          </button>
+        </form>
+        <div class="godo-tasks-wrapper">
+          <ul class="godo-tasks-list">
+            <li class="godo-tasks-item">
+              <input type="radio" />
+              <span> the first task </span>
+            </li>
+            <li class="godo-tasks-item">
+              <input type="radio" />
+              <span> the second task </span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -1,0 +1,81 @@
+html {
+  padding: 0;
+  margin: 0;
+}
+body {
+  padding: 0px;
+  margin: 0px;
+  background-color: #232d3f;
+}
+.godo-container {
+  width: 100%;
+}
+
+.godo-container .godo-logo {
+  font-size: 5rem;
+  color: #fff;
+  font-family: "Lucida Sans", Verdana, sans-serif;
+  text-align: center;
+  margin: 0px;
+}
+
+.godo-container .godo-wrapper {
+  width: 58%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.godo-container .godo-wrapper .godo-form {
+  display: flex;
+  gap: 6px;
+}
+
+.godo-form .godo-input {
+  padding: 20px 8px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  border: none;
+  flex: 1;
+}
+
+.godo-form .godo-submit-btn {
+  padding: 20px 40px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  background-color: #fff;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #232d3f;
+}
+
+.godo-container .godo-wrapper .godo-tasks-wrapper {
+  margin-top: 10px;
+  flex: 1;
+}
+
+.godo-tasks-wrapper .godo-tasks-list {
+  list-style: none;
+  padding: 0px;
+}
+
+.godo-tasks-wrapper .godo-tasks-item {
+  border: 2px solid #fff;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  padding: 12px 8px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  display: flex;
+  text-transform: capitalize;
+}
+
+.godo-tasks-wrapper .godo-tasks-item input[type="radio"] {
+  width: 22px;
+  height: 22px;
+  display: block;
+  margin-right: 4px;
+}
