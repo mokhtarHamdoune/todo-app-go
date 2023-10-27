@@ -24,14 +24,16 @@
         </form>
         <div class="godo-tasks-wrapper">
           <ul class="godo-tasks-list">
+            {{range .}}
             <li class="godo-tasks-item">
+              {{if .IsDone}}
+              <input checked type="radio" />
+              {{else}}
               <input type="radio" />
-              <span> the first task </span>
+              {{end}}
+              <span>{{ .Content }}</span>
             </li>
-            <li class="godo-tasks-item">
-              <input type="radio" />
-              <span> the second task </span>
-            </li>
+            {{end}}
           </ul>
         </div>
       </div>
