@@ -10,7 +10,7 @@
     <div class="godo-container">
       <h1 class="godo-logo">GODO</h1>
       <div class="godo-wrapper">
-        <form class="godo-form">
+        <form class="godo-form-header" method="post" action="/">
           <input
             placeholder="Your new task goes here.."
             class="godo-input"
@@ -22,20 +22,23 @@
             Add
           </button>
         </form>
-        <div class="godo-tasks-wrapper">
+        <form class="godo-tasks-wrapper" method="POST" action="/">
           <ul class="godo-tasks-list">
-            {{range .}}
+            {{range $index, $element := .}} {{if not $element.IsDone}}
             <li class="godo-tasks-item">
-              {{if .IsDone}}
-              <input checked type="radio" />
-              {{else}}
-              <input type="radio" />
-              {{end}}
-              <span>{{ .Content }}</span>
+              <input type="radio" name="done" value="{{$index}}" />
+              <span>{{ $element.Content }}</span>
             </li>
-            {{end}}
+            {{end}} {{end}}
           </ul>
-        </div>
+          {{ if gt (len .) 0}}
+          <div class="godo-taks-list-footer">
+            <button type="submit" class="godo-taks-submit-btn">
+              Submit Completed Tasks
+            </button>
+          </div>
+          {{end}}
+        </form>
       </div>
     </div>
   </body>

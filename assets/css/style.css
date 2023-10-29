@@ -20,6 +20,7 @@ body {
 }
 
 .godo-container .godo-wrapper {
+  display: block;
   width: 58%;
   height: 100%;
   margin: auto;
@@ -27,12 +28,12 @@ body {
   flex-direction: column;
 }
 
-.godo-container .godo-wrapper .godo-form {
+.godo-container .godo-wrapper .godo-form-header {
   display: flex;
   gap: 6px;
 }
 
-.godo-form .godo-input {
+.godo-form-header .godo-input {
   padding: 20px 8px;
   border-radius: 8px;
   font-size: 1.2rem;
@@ -40,7 +41,7 @@ body {
   flex: 1;
 }
 
-.godo-form .godo-submit-btn {
+.godo-form-header .godo-submit-btn {
   padding: 20px 40px;
   border-radius: 8px;
   font-size: 1.2rem;
@@ -78,4 +79,18 @@ body {
   height: 22px;
   display: block;
   margin-right: 4px;
+}
+.godo-taks-list-footer {
+  display: flex;
+  justify-content: center;
+}
+.godo-taks-list-footer .godo-taks-submit-btn {
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #232d3f;
 }
