@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"text/template"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 )
 
@@ -29,6 +30,14 @@ func main (){
     envErr := godotenv.Load(".env")
     if envErr != nil {
         log.Fatalf("Error loading env file %v",envErr)
+    }
+    // connect to the database 
+    db,dbOpenerror :=  connectDB()
+    if(dbOpenerror != nil){
+        log.Fatal(dbOpenerror)
+    }
+    if err := db.Ping(); err != nil {
+        log.Fatal(err)
     }
     tasks  := make([]Task,0);
     tmpl, parsErr := template.ParseFS(os.DirFS("./templates"),"task.html")
@@ -59,7 +68,6 @@ func main (){
                 }
                 tasks = append(tasks,newTaks)
             }
-            // TODO: refactore the code and find a simple method to delete if exist
             if(r.Form.Has("done")){
                 taksIndexStr:= r.FormValue("done")
                 taksIndexInt,err := strconv.ParseInt(taksIndexStr,10,0);
