@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+
 func connectDB() (*sql.DB, error) {
   var db_name string = os.Getenv("DB")
   var db_host string = os.Getenv("DB_HOST")
@@ -17,3 +18,4 @@ func connectDB() (*sql.DB, error) {
   
   return db, err;
 }
+

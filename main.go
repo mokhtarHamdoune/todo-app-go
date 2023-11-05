@@ -12,20 +12,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type Task struct  {
-    Content string;
-    IsDone bool;
-}
 
-func deleteTask(tasks []Task,indexOfItem int) []Task {
-    newTasks := make([]Task,0)
-    for i:= 0; i < len(tasks); i++ {
-        if i!= int(indexOfItem) {
-            newTasks = append(newTasks, tasks[i])
-        }
-    }
-    return newTasks
-}
 func main (){
     envErr := godotenv.Load(".env")
     if envErr != nil {
@@ -39,12 +26,19 @@ func main (){
     if err := db.Ping(); err != nil {
         log.Fatal(err)
     }
-    tasks  := make([]Task,0);
-    tmpl, parsErr := template.ParseFS(os.DirFS("./templates"),"task.html")
+    taskManager := TaskManager{database: db}
+    // get all task for the firt time 
+    tasks, getAllErr := taskManager.getAll()
 
+    if getAllErr != nil {
+        log.Fatal(getAllErr)
+    }
+
+    tmpl, parsErr := template.ParseFS(os.DirFS("./templates"),"task.html")
     if(parsErr != nil){
         log.Fatalf("we couldn't read the content of the file %v",envErr)
     }
+
     /* 
         * Serve static file 
         * StripPrefix as the name suggeste it will remove the /static/ prefix from the url
@@ -66,15 +60,21 @@ func main (){
                     Content:r.Form.Get("content"),
                     IsDone:false,
                 }
-                tasks = append(tasks,newTaks)
+                task, err := taskManager.save(newTaks)
+                if err != nil {
+                    log.Fatal(err)
+                }
+                tasks = append(tasks, task)
+               
             }
             if(r.Form.Has("done")){
                 taksIndexStr:= r.FormValue("done")
                 taksIndexInt,err := strconv.ParseInt(taksIndexStr,10,0);
                 if  err != nil {
+                    taskManager.update(int(taksIndexInt),Task{IsDone: true})
                     fmt.Printf("Error: %v\n", err)
                 } 
-                tasks = deleteTask(tasks,int(taksIndexInt))
+
             }
         }
         tmpl.Execute(w,tasks)
