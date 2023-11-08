@@ -24,12 +24,12 @@
         </form>
         <form class="godo-tasks-wrapper" method="POST" action="/">
           <ul class="godo-tasks-list">
-            {{range $index, $element := .}} {{if not $element.IsDone}}
+            {{range .}}
             <li class="godo-tasks-item">
-              <input type="radio" name="done" value="{{$index}}" />
-              <span>{{ $element.Content }}</span>
+              <input type="radio" name="done" value="{{.Id}}" />
+              <span>{{ .Content }}</span>
             </li>
-            {{end}} {{end}}
+            {{end}}
           </ul>
           {{ if gt (len .) 0}}
           <div class="godo-taks-list-footer">

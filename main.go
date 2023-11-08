@@ -12,7 +12,15 @@ import (
 	"github.com/joho/godotenv"
 )
 
-
+func  deleteTask(tasks []Task,taskId int) []Task {
+    newTasks := make([]Task,0)
+    for i:= 0; i < len(tasks); i++ {
+        if tasks[i].Id!= taskId {
+            newTasks = append(newTasks, tasks[i])
+        }
+    }
+    return newTasks
+}
 func main (){
     envErr := godotenv.Load(".env")
     if envErr != nil {
@@ -68,12 +76,18 @@ func main (){
                
             }
             if(r.Form.Has("done")){
-                taksIndexStr:= r.FormValue("done")
-                taksIndexInt,err := strconv.ParseInt(taksIndexStr,10,0);
+                taskIdStr:= r.FormValue("done")
+                taskId,err := strconv.ParseInt(taskIdStr,10,0);
                 if  err != nil {
-                    taskManager.update(int(taksIndexInt),Task{IsDone: true})
-                    fmt.Printf("Error: %v\n", err)
+                    log.Fatal(getAllErr)
                 } 
+                // we delete the task from the database
+                error := taskManager.delete(int(taskId))
+                if(error != nil){
+                    log.Fatal(getAllErr)
+                }
+                // then list
+                tasks = deleteTask(tasks,int(taskId))
 
             }
         }
